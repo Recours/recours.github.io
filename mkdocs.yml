@@ -1,0 +1,12 @@
+site_name: My Docs
+theme:
+    name: material
+    logo: VK_WorkSpace.svg
+    features:
+        - navigation.tabs
+extra_css:
+    - material-styles.css
+nav:
+    - FAQ: index.md
+    - HowTo:
+        - Как запустить первый портал?: my-first-portal.md
