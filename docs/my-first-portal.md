@@ -4,7 +4,7 @@
 
 ## Предварительная подготовка
 
-1. Регистрируемся в [GitLab](https://gitlab.com/). 
+1. Регистрируемся в [GitHub](https://github.com/). 
 
 2. Создаем свой первый проект. Это можно сделать сразу после регистрации или создать позже.
 
@@ -94,74 +94,77 @@ site_name: My Docs
 
 1. Установим тему Material:
 
-	```
-	pip install mkdocs-material
-	```
+  ```
+  pip install mkdocs-material
+  ```
 
 2. Откроем файл mkdocs.yml и подключим ее к нашему проекту:
 
-	```
-	theme:
-		name: material # основная тема, которую используем, https://squidfunk.github.io/mkdocs-material/
-	```
+  ```
+  theme:
+  	name: material # основная тема, которую используем, https://squidfunk.github.io/mkdocs-material/
+  ```
 
 3. Пересоберем портал:
 
-	```
-	mkdocs serve
-	```
+  ```
+  mkdocs serve
+  ```
 
-4. Теперь заменим логотип на нашем портале:
+4. Нам нужно добавить новый документ на наш портал и при это указать его в навигационном меню. Для этого в файле mkdocs.yml нужно создать новую секцию:
 
-	```
-	theme:
-		name: material # основная тема, которую используем, https://squidfunk.github.io/mkdocs-material/
-		logo: VK_WorkSpace_logo.svg # относительный путь к лого, который отображается на портале и на титуле дока, в колонтитулах дока, обязательно svg
-	```
+  ```
+  nav:
+  ```
 
-5. Поменяем цвета портала на корпоративные. Для этого нужно внутри папки docs нужно создать файл material-styles.css и указать путь до него в mkdocs.yml:
+5. Теперь скачайте из Телеграмма файлик `my-first-docs-portal.md`. И перенесите его в папку docs в вашем проекте.
 
-	```
-	extra_css:
-		- material-styles.css
-	```
+6. Добавим инструкцию на портал:
 
-	   А внутри файла material-styles.css укажем стили для шапки нашего портала:
+   ```
+   nav:
+   	- Как создать свой первый портал?: my-first-docs-portal.md
+   ```
 
-	   ```
-	   .md-header {
-		 --md-primary-fg-color: #FFFFFF;
-		 --md-primary-bg-color: #000000;
-	   }
-	   ```
+7. Добавим группирующий раздел и перенесем навигационную панель наверх.
 
-6. Теперь нам нужно добавить новый документ на наш портал и при это указать его в навигационном меню. Для этого в файле mkdocs.yml нужно создать новую секцию:
+   ```
+   nav:
+   	- HowTo:
+   		- Как создать свой первый портал?: my-first-docs-portal.md
+   	- FAQ:
+   theme:
+   	name: material # основная тема, которую используем, https://squidfunk.github.io/mkdocs-material/
+   	features:
+   		- navigation.tabs
+   		
+   ```
 
-	```
-	nav:
-	```
+8. Заменим логотип на нашем портале:
 
-7. Теперь скачайте из Телеграмма файлик `my-first-docs-portal.md`. И перенесите его в папку docs в вашем проекте.
+```
+theme:
+	name: material # основная тема, которую используем, https://squidfunk.github.io/mkdocs-material/
+	logo: VK_WorkSpace_logo.svg # относительный путь к лого, который отображается на портале и на титуле дока, в колонтитулах дока, обязательно svg
+```
 
-8. Теперь добавим инструкцию на портал:
+1. Поменяем цвета портала на корпоративные. Для этого нужно внутри папки docs нужно создать файл material-styles.css и указать путь до него в mkdocs.yml:
 
-	```
-	nav:
-		- Как создать свой первый портал?: my-first-docs-portal.md
-	```
+  ```
+  extra_css:
+  	- material-styles.css
+  ```
 
-9. Теперь добавим группирующий раздел и перенесем навигационную панель наверх.
+     А внутри файла material-styles.css укажем стили для шапки нашего портала:
+    
+     ```
+     .md-header {
+     --md-primary-fg-color: #FFFFFF;
+     --md-primary-bg-color: #000000;
+     }
+     ```
 
-	```
-	nav:
-		- HowTo:
-			- Как создать свой первый портал?: my-first-docs-portal.md
-		- FAQ:
-	theme:
-		name: material # основная тема, которую используем, https://squidfunk.github.io/mkdocs-material/
-		features:
-			- navigation.tabs
-	```
+
 
 Итоговый `mkdocs.yml`:
 
@@ -208,6 +211,7 @@ extra_css:
 	```
 
 3. Расширение, которое позволяет переиспользовать одинаковые части документации:
+
 	```
 	markdown_extensions:
 		- pymdownx.snippets # Расширение Snippets добавляет возможность встраивать в документ содержимое из произвольных файлов, включая другие документы или исходные файлы
@@ -219,39 +223,56 @@ extra_css:
 
 1. Склонируем репозиторий в любое удобное место, но не в папку с нашим порталом. 
 
-	   ```
-	   PS C:\Users\User\Desktop> git clone https://gitlab.com/nikitasgroup1/my-first-docs-portal
-	   ```
+	```
+	PS C:\Users\User\Desktop> git clone https://gitlab.com/nikitasgroup1/my-first-docs-portal
+	```
 
 2. В моем случае, я клонировал на рабочий стол и у меня появилась папка с названием репозитория. Теперь нужно перенести все содержимое папки my-project внутрь новой папки.
 
 3. Перейдем внутрь папки репозитория.
 
-	   ```
-	   cd my-first-docs-portal
-	   ```
+	```
+	cd my-first-docs-portal
+	```
+	
+3. Собираем наш первый коммит:
 
-```
-PS C:\Users\User\Desktop\my-first-docs-portal> git add . --all
-PS C:\Users\User\Desktop\my-first-docs-portal> git commit -m "Наш первый портла"
-[main 88fd875] Наш первый портла
- 5 files changed, 206 insertions(+)
- create mode 100644 docs/VK_WorkSpace_logo.svg
- create mode 100644 docs/index.md
- create mode 100644 docs/material-styles.css
- create mode 100644 docs/my-first-docs-portal.md
- create mode 100644 mkdocs.yml
-PS C:\Users\User\Desktop\my-first-docs-portal> git branch -M main
-PS C:\Users\User\Desktop\my-first-docs-portal> git push -uf origin main
-warning: redirecting to https://gitlab.com/nikitasgroup1/my-first-docs-portal.git/
-Enumerating objects: 9, done.
-Counting objects: 100% (9/9), done.
-Delta compression using up to 20 threads
-Compressing objects: 100% (8/8), done.
-Writing objects: 100% (8/8), 4.10 KiB | 4.10 MiB/s, done.
-Total 8 (delta 0), reused 0 (delta 0), pack-reused 0
-To https://gitlab.com/nikitasgroup1/my-first-docs-portal
-   51f60d8..88fd875  main -> main
-branch 'main' set up to track 'origin/main'.
-```
+	```
+	git add . --all
+	git commit -m "Наш первый портал"
+	```
+	
+	Итог
+	
+	```
+	[main 88fd875] Наш первый портал
+	 5 files changed, 206 insertions(+)
+	 create mode 100644 docs/VK_WorkSpace_logo.svg
+	 create mode 100644 docs/index.md
+	 create mode 100644 docs/material-styles.css
+	 create mode 100644 docs/my-first-docs-portal.md
+	 create mode 100644 mkdocs.yml
+	```
+	
+3. Отправим изменения в репозиторий на сервер GitHub'а:
+
+	```
+	git push -uf origin main
+	```
+	
+	Итог:
+	
+	```
+	Перечисление объектов: 12, готово.
+	Подсчет объектов: 100% (12/12), готово.
+	При сжатии изменений используется до 8 потоков
+	Сжатие объектов: 100% (10/10), готово.
+	Запись объектов: 100% (10/10), 11.02 КиБ | 11.02 МиБ/с, готово.
+	Всего 10 (изменений 0), повторно использовано 0 (изменений 0), повторно использовано пакетов 0
+	To https://github.com/Recours/DocsPortal.git
+	   e7a1c28..c9db308  main -> main
+	branch 'main' set up to track 'origin/main'.
+	```
+	
+	
 
