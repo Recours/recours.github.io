@@ -10,3 +10,6 @@ nav:
     - FAQ: index.md
     - HowTo:
         - Как запустить первый портал?: my-first-portal.md
+markdown_extensions:
+    - pymdownx.superfences # более гибкое оформление блоков https://facelessuser.github.io/pymdown-extensions/extensions/superfences/
+    - admonition

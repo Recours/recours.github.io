@@ -8,21 +8,22 @@
 
 2. Создаем свой первый проект. Это можно сделать сразу после регистрации или создать позже.
 
-3. Устанавливаем Git: https://git-scm.com/download/win.
+3. Устанавливаем Git: [https://git-scm.com/download/win](https://git-scm.com/download/win).
 
-4. Устанавливаем Python, например последнюю версию: https://www.python.org/downloads/release/python-3121/. Пролистайте в самый низ и выберите версию для вашей ОC. Для пользователей MacOS, можно скачать все следующей командой:
+4. Устанавливаем Python, например последнюю версию: [https://www.python.org/downloads/release/python-3121/](https://www.python.org/downloads/release/python-3121/). Пролистайте в самый низ и выберите версию для вашей ОC. Для пользователей MacOS, можно скачать все следующей командой:
 
 	```
 	brew install python
 	```
 
-5. Для самых стойких — установить Docker: https://www.docker.com/get-started/. С помощью докера мы будем автоматизировать выкладку обновлений контента.
+5. Для самых стойких — установить Docker: [https://www.docker.com/get-started/](https://www.docker.com/get-started/). С помощью докера мы будем автоматизировать выкладку обновлений контента.
 
 6. Перезапустите компьютер после установки всех компонент.
 
 7. Проверьте, что Git и Python успешно установились:
 
 	```
+	
 	git --version
 	git version 2.40.1.windows.1
 	   
@@ -31,6 +32,7 @@
 	   
 	pip --version
 	pip 22.3.1 from C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\pip (python 3.11)
+	
 	```
 
 ## Первые шаги
@@ -41,9 +43,9 @@
 
 2. Устанавливаем MkDocs локально:
 
-	```
-	pip install mkdocs
-	```
+    ```
+    pip install mkdocs
+    ```
 
 3. Проверяем, что все установилось:
 
@@ -70,7 +72,7 @@
 	mkdocs serve
 	```
 
-   В конце, в результате выполнения команды можно получить ссылку по которой доступен результат сборки портала:
+	В конце, в результате выполнения команды можно получить ссылку по которой доступен результат сборки портала:
 
 	```
 	INFO    -  Building documentation...
@@ -80,7 +82,7 @@
 	INFO    -  [16:00:36] Serving on http://127.0.0.1:8000/
 	```
 
-7. Копируем ссылку и вставляем в адресную строку.
+7. Копируем http://127.0.0.1:8000/ и вставляем в адресную строку.
 
 ## Наводим красоту
 
@@ -90,79 +92,77 @@
 site_name: My Docs
 ```
 
-Для MkDocs есть множество различных тем, плагинов и расширений. Самая популярная тема для MkDocs c активной поддержкой и постоянным развитием — это MkDocs Material: https://squidfunk.github.io/mkdocs-material/. Сделаем наш портал в такой же теме.
+Для MkDocs есть множество различных тем, плагинов и расширений. Самая популярная тема для MkDocs c активной поддержкой и постоянным развитием — это MkDocs Material: [https://squidfunk.github.io/mkdocs-material/](https://squidfunk.github.io/mkdocs-material/). Сделаем наш портал в такой же теме.
 
 1. Установим тему Material:
 
-  ```
-  pip install mkdocs-material
-  ```
+	```
+	pip install mkdocs-material
+	```
 
 2. Откроем файл mkdocs.yml и подключим ее к нашему проекту:
 
-  ```
-  theme:
-  	name: material # основная тема, которую используем, https://squidfunk.github.io/mkdocs-material/
-  ```
+	```
+	theme:
+		name: material # https://squidfunk.github.io/mkdocs-material/
+	```
 
 3. Пересоберем портал:
 
-  ```
-  mkdocs serve
-  ```
+	```
+	mkdocs serve
+	```
 
 4. Нам нужно добавить новый документ на наш портал и при это указать его в навигационном меню. Для этого в файле mkdocs.yml нужно создать новую секцию:
 
-  ```
-  nav:
-  ```
+	```
+	nav:
+	```
 
-5. Теперь скачайте из Телеграмма файлик `my-first-docs-portal.md`. И перенесите его в папку docs в вашем проекте.
+5. Теперь скачайте из Телеграмма файлик `my-first-docs-portal.md`. И перенесите его в папку **docs** в вашем проекте.
 
 6. Добавим инструкцию на портал:
 
-   ```
-   nav:
-   	- Как создать свой первый портал?: my-first-docs-portal.md
-   ```
+	```
+	nav:
+		- Как создать свой первый портал?: my-first-docs-portal.md
+	```
 
 7. Добавим группирующий раздел и перенесем навигационную панель наверх.
 
-   ```
-   nav:
-   	- HowTo:
-   		- Как создать свой первый портал?: my-first-docs-portal.md
-   	- FAQ:
-   theme:
-   	name: material # основная тема, которую используем, https://squidfunk.github.io/mkdocs-material/
-   	features:
-   		- navigation.tabs
-   		
-   ```
+	```
+	nav:
+		- HowTo:
+			- Как создать свой первый портал?: my-first-docs-portal.md
+	theme:
+		name: material # основная тема, которую используем, https://squidfunk.github.io/mkdocs-material/
+		features:
+			- navigation.tabs # перемещает навигационное меню наверх
+	```
 
 8. Заменим логотип на нашем портале:
 
-```
-theme:
-	name: material # основная тема, которую используем, https://squidfunk.github.io/mkdocs-material/
-	logo: VK_WorkSpace_logo.svg # относительный путь к лого, который отображается на портале и на титуле дока, в колонтитулах дока, обязательно svg
-```
+	```
+	theme:
+		name: material #  https://squidfunk.github.io/mkdocs-material/
+		logo: VK_WorkSpace_logo.svg
+	```
 
-1. Поменяем цвета портала на корпоративные. Для этого нужно внутри папки docs нужно создать файл material-styles.css и указать путь до него в mkdocs.yml:
+9. Поменяем цвета портала на корпоративные. Для этого нужно внутри папки docs нужно создать файл material-styles.css и указать путь до него в mkdocs.yml:
 
-  ```
-  extra_css:
-  	- material-styles.css
-  ```
+	```
+	extra_css:
+		- material-styles.css
+	```
 
-     А внутри файла material-styles.css укажем стили для шапки нашего портала:
+    А внутри файла material-styles.css укажем стили для шапки нашего портала:
     
-     ```
-     .md-header {
-     --md-primary-fg-color: #FFFFFF;
-     --md-primary-bg-color: #000000;
-     }
-     ```
+    ```
+    .md-header {
+    --md-primary-fg-color: #FFFFFF;
+    --md-primary-bg-color: #000000;
+    }
+    ```
 
 
 
@@ -188,15 +188,15 @@ extra_css:
 
 Рекомендуемые инструменты:
 
-1. Плагин для загрузки видео на портал:
+1. Плагин для работы с видео на портал:
 
 	```
 	plugins:
 		- mkdocs-video:
 			is_video: True #изменение тега для видео на конечной странице html (было <iframe>, стало <video>, когда true)
-			#video_type: mpeg #- если формат видео не mp4 (по умолчанию), а другой. Этот параметр будет работать только с <video> тегом ( is_video: True)
-			#video_autoplay: True # автовоспроизведение видео. Этот параметр будет работать только с <video> тегом ( is_video: True)
-			#video_loop: False # зацикливание видео. Этот параметр будет работать только с <video> тегом ( is_video: True)
+			video_type: mpeg #- если формат видео не mp4 (по умолчанию), а другой. Этот параметр будет работать только с <video> тегом ( is_video: True)
+			video_autoplay: True # автовоспроизведение видео. Этот параметр будет работать только с <video> тегом ( is_video: True)
+			video_loop: False # зацикливание видео. Этот параметр будет работать только с <video> тегом ( is_video: True)
 			video_muted: True # должно ли видео быть на мьюте. Этот параметр будет работать только с <video> тегом ( is_video: True)
 			video_controls: True # отображение элементов управления видео. Этот параметр будет работать только с <video> тегом ( is_video: True)
 			css_style:
@@ -207,8 +207,11 @@ extra_css:
 
 	```
 	markdown_extensions:
-		- admonition # примечания (коллауты), описание https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#admonition и https://python-markdown.github.io/extensions/admonition/
+		- admonition # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#admonition
 	```
+	
+	!!!warning "Внимание"
+		Вот например красивое внимание
 
 3. Расширение, которое позволяет переиспользовать одинаковые части документации:
 
@@ -216,6 +219,9 @@ extra_css:
 	markdown_extensions:
 		- pymdownx.snippets # Расширение Snippets добавляет возможность встраивать в документ содержимое из произвольных файлов, включая другие документы или исходные файлы
 	```
+	
+	!!!note "Примечание"
+		Нам в последнее время стало более актуально использовать шаблонизатор Jinja, который работает в рамках плагина [mkdocs-macros-plugin](https://mkdocs-macros-plugin.readthedocs.io/en/latest/).
 
 ## Начинаем работать с Git
 
@@ -274,5 +280,40 @@ extra_css:
 	branch 'main' set up to track 'origin/main'.
 	```
 	
+## Публикуем контент в GitHub Pages
+
+Нам нужно назвать свой репозиторий в следующем виде: {GitHub-nickname}.github.io. Например: recours.github.io. Переименовать репозиторий можно в разделе Settings проекта. Это требование GitHub'а, иначе публикации не будет.
+
+1. В корневой папке нашего проекта создайте папку **.github**.
+
+2. В папке **.github** создайте папку **workflows**.
+
+3. В папке **workflows** создайте файл `mkdocs.yml`.
+
+4. Вставьте следующий код в этот файл:
+
+	```
+	name: mkdocs
+	on:
+	  push:
+		branches:
+		  - main
+	jobs:
+	  deploy:
+		runs-on: ubuntu-latest
+		steps:
+		  - uses: actions/checkout@v2
+		  - uses: actions/setup-python@v2
+			with:
+			  python-version: 3.x
+		  - run: pip install mkdocs-material
+		  - run: mkdocs gh-deploy --force-
+	```
+
+
+	
+## Как подключить к репозиторию в GitLab локальный раннер
+
+1. Нужно обязательно установить Docker 
 	
 
