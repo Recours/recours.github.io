@@ -82,7 +82,7 @@
 	INFO    -  [16:00:36] Serving on http://127.0.0.1:8000/
 	```
 
-7. Копируем http://127.0.0.1:8000/ и вставляем в адресную строку.
+7. Копируем [http://127.0.0.1:8000/](http://127.0.0.1:8000/) и вставляем в адресную строку.
 
 ## Наводим красоту
 
@@ -96,73 +96,79 @@ site_name: My Docs
 
 1. Установим тему Material:
 
-	```
-	pip install mkdocs-material
-	```
+  ```
+  pip install mkdocs-material
+  ```
 
-2. Откроем файл mkdocs.yml и подключим ее к нашему проекту:
+2. Устанавливаем пакет расширений (понадобится нам в будущем):
 
-	```
-	theme:
-		name: material # https://squidfunk.github.io/mkdocs-material/
-	```
+  ```
+  pip install pymdown-extensions
+  ```
 
-3. Пересоберем портал:
+3. Откроем файл mkdocs.yml и подключим ее к нашему проекту:
 
-	```
-	mkdocs serve
-	```
+  ```
+  theme:
+  	name: material # https://squidfunk.github.io/mkdocs-material/
+  ```
 
-4. Нам нужно добавить новый документ на наш портал и при это указать его в навигационном меню. Для этого в файле mkdocs.yml нужно создать новую секцию:
+4. Пересоберем портал:
 
-	```
-	nav:
-	```
+  ```
+  mkdocs serve
+  ```
 
-5. Теперь скачайте из Телеграмма файлик `my-first-docs-portal.md`. И перенесите его в папку **docs** в вашем проекте.
+5. Нам нужно добавить новый документ на наш портал и при это указать его в навигационном меню. Для этого в файле mkdocs.yml нужно создать новую секцию:
 
-6. Добавим инструкцию на портал:
+  ```
+  nav:
+  ```
 
-	```
-	nav:
-		- Как создать свой первый портал?: my-first-docs-portal.md
-	```
+6. Теперь скачайте из Телеграмма файлик `my-first-docs-portal.md`. И перенесите его в папку **docs** в вашем проекте.
 
-7. Добавим группирующий раздел и перенесем навигационную панель наверх.
+7. Добавим инструкцию на портал:
 
-	```
-	nav:
-		- HowTo:
-			- Как создать свой первый портал?: my-first-docs-portal.md
-	theme:
-		name: material # основная тема, которую используем, https://squidfunk.github.io/mkdocs-material/
-		features:
-			- navigation.tabs # перемещает навигационное меню наверх
-	```
+  ```
+  nav:
+  	- Как создать свой первый портал?: my-first-docs-portal.md
+  ```
 
-8. Заменим логотип на нашем портале:
+8. Добавим группирующий раздел и перенесем навигационную панель наверх.
 
-	```
-	theme:
-		name: material #  https://squidfunk.github.io/mkdocs-material/
-		logo: VK_WorkSpace_logo.svg
-	```
+  ```
+  nav:
+  	- HowTo:
+  		- Как создать свой первый портал?: my-first-docs-portal.md
+  theme:
+  	name: material # основная тема, которую используем, https://squidfunk.github.io/mkdocs-material/
+  	features:
+  		- navigation.tabs # перемещает навигационное меню наверх
+  ```
 
-9. Поменяем цвета портала на корпоративные. Для этого нужно внутри папки docs нужно создать файл material-styles.css и указать путь до него в mkdocs.yml:
+9. Заменим логотип на нашем портале:
 
-	```
-	extra_css:
-		- material-styles.css
-	```
+  ```
+  theme:
+  	name: material #  https://squidfunk.github.io/mkdocs-material/
+  	logo: VK_WorkSpace_logo.svg
+  ```
 
-    А внутри файла material-styles.css укажем стили для шапки нашего портала:
-    
-    ```
-    .md-header {
-    --md-primary-fg-color: #FFFFFF;
-    --md-primary-bg-color: #000000;
-    }
-    ```
+10. Поменяем цвета портала на корпоративные. Для этого нужно внутри папки docs нужно создать файл material-styles.css и указать путь до него в mkdocs.yml:
+
+  ```
+  extra_css:
+  	- material-styles.css
+  ```
+
+   А внутри файла material-styles.css укажем стили для шапки нашего портала:
+
+   ```
+   .md-header {
+   --md-primary-fg-color: #FFFFFF;
+   --md-primary-bg-color: #000000;
+   }
+   ```
 
 
 
@@ -280,6 +286,13 @@ extra_css:
 	branch 'main' set up to track 'origin/main'.
 	```
 	
+
+Если вы как и я не фанаты работать с консолью, то рекоменду воспользоваться UI клиентами для работы с Git:
+
+- [Sourcetree](https://www.sourcetreeapp.com/)
+- [Fork](https://git-fork.com/)
+- [GitHub Desktop](https://desktop.github.com/)
+	
 ## Публикуем контент в GitHub Pages
 
 Нам нужно назвать свой репозиторий в следующем виде: {GitHub-nickname}.github.io. Например: recours.github.io. Переименовать репозиторий можно в разделе Settings проекта. Это требование GitHub'а, иначе публикации не будет.
@@ -310,10 +323,108 @@ extra_css:
 		  - run: mkdocs gh-deploy --force-
 	```
 
+	Что есть в этом скрипте:
 
-	
+	- `name: mkdocs:` — это имя рабочего процесса.
+	- `on:` — определяет условия, при которых запускается данный рабочий процесс. В данном случае, рабочий процесс запускается при каждом пуше в ветку "main".
+	- `jobs:` — определяет список задач, которые должны быть выполнены в рамках этого рабочего процесса. `deploy` — название задачи, в рамках которой мы будем деплоить портал.
+	- `- uses: actions/checkout@v2` — клонирует репозиторий в рабочее пространство, где будет выполняться генерация статического контента и сборка портала.
+
+5. Запушьте изменения в удаленный репозиторий:
+
+	```
+	git add . --all
+	git commit -m "Автоматическая публикация контента"
+	git push -uf origin main
+	```
+
+### Публикуем контент в GitLab Pages
+
+Все очень похоже при публикации в GitLab Pages:
+
+1. В корне проекта нужно создать файл `.gitlab-ci.yml`.
+
+2. Вставить следующий код в файл с попракой на название веток в вашем репозитории:
+
+```
+# Используем легковесный образ чтобы минимизировать задержки на скачивание и установке образа
+image: python:3-alpine
+
+.run_only_on_master:
+  &run_only_on_master
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+build_static_site:
+  stage: build
+  image: python:3-alpine
+  before_script:
+    - pip install "Cython<3.0" pyyaml --user --no-build-isolation # гитхабные тикеты про багу https://github.com/yaml/pyyaml/issues/601 и https://github.com/yaml/pyyaml/pull/702
+    - pip install mkdocs
+    - pip install mkdocs-material
+    - pip install pymdown-extensions
+  script:
+    - mkdocs build -d public
+  artifacts:
+    expire_in: 15 mins
+    paths:
+      - public
+	  
+# специальная джоба для выкладки в gitlab pages (для ее выполнения обязательна выполненная джоба build_static_site)
+pages:
+  <<: *run_only_on_master
+  stage: deploy
+  needs:
+    - build_static_site
+  script: # это костыль для обхода известной баги гитлаба - нельзя джобу без скрипта. Поэтому тут просто зовем команду-заглушку, которая ничего не делает
+    - "true"
+  artifacts:
+    expire_in: 15 mins
+    paths:
+      - public
+```
+
+
+​	
 ## Как подключить к репозиторию в GitLab локальный раннер
 
-1. Нужно обязательно установить Docker 
-	
+Раннер нужен для выполнения задач описанных в GitHub Actions и GitLab CI. В GitHub нет необходимости подключать свои раннеры, потому что все на себя берут публичные раннеры. 
+В GitLab время этих раннеров сильно ограничено, либо их может не быть совсем, если это GitLab в вашей инфраструктуре. При этом у вас нет публичных раннеров на компанию.
 
+1. Нужно обязательно установить Docker — это самый простой способ поддерживать локальный раннер.
+
+2. Все команды выполняются в командной строке. Сначала создадим пустую конфигурацию для нашего раннера.
+	
+	```
+	docker volume create gitlab-runner-config
+	```
+
+3. Запустим контейнер с нашим раннером с помощью следующей команды:
+
+	```
+	docker run -d --name gitlab-runner --restart always -v /var/run/docker.sock:/var/run/docker.sock -v gitlab-runner-config:/etc/gitlab-runner gitlab/gitlab-runner:alpine-v15.9.1
+	```
+	
+4. В репозитории проекта в **GitLab** перейдите в раздел **Settings** → **CI/CD** и разверните раздел **Runners**. Нам понадобится эта страница для настройки раннера:
+
+5. Перейдите в Docker, в раздел Containers.
+
+6. Найдите там контейнер gitlab-runner, кликните по нему и внутри перейдите на вкладку Exec.
+
+7. Введите команду:
+
+	```
+	gitlab-runner register
+	```
+
+8. Введите ваш GitLab instance, например: https://gitlab.com/
+
+9. Введите registration token из шага 3.
+
+10. Опционально оставляем описание и теги. Можно просто прокликать Enter.
+
+11. Как executor пропишите: `docker`
+
+12. Пропишите образ докера по умолчанию: `ruby 2.7`.
+
+13. Обновите страницу в GitLab'e и проверьте, что раннер появился:

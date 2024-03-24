@@ -1,15 +1,16 @@
-site_name: My Docs
+site_name: Tech Writer Days
 theme:
     name: material
-    logo: VK_WorkSpace.svg
+    logo: TWD_logo.png
+    favicon: TWD_logo.png
     features:
         - navigation.tabs
 extra_css:
     - material-styles.css
 nav:
-    - FAQ: index.md
     - HowTo:
         - Как запустить первый портал?: my-first-portal.md
+    - FAQ: index.md
 markdown_extensions:
     - pymdownx.superfences # более гибкое оформление блоков https://facelessuser.github.io/pymdown-extensions/extensions/superfences/
     - admonition
