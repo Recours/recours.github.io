@@ -5,12 +5,31 @@ theme:
     favicon: TWD_logo.png
     features:
         - navigation.tabs
+    font: false # отключает скачивание шрифтов для отрисовки темы материал из Гугла
 extra_css:
     - material-styles.css
 nav:
-    - HowTo:
-        - Как запустить первый портал?: my-first-portal.md
-    - FAQ: index.md
+    - Как запустить первый портал?:
+        - Вот так: my-first-portal.md
+    - Дом: index.md
 markdown_extensions:
     - pymdownx.superfences # более гибкое оформление блоков https://facelessuser.github.io/pymdown-extensions/extensions/superfences/
     - admonition
+plugins:
+    - search:
+        lang:
+          - ru
+    - pdf-generate: # плагин для выгрузки в PDF https://github.com/iSOLveIT/mkdocs-pdf-generate
+        copyright: "© TechWriter Days, 2024 г. Все права защищены"
+        cover: true
+        cover_title: TWD # название на титульном листе по дефолту, если в метаданных в md не указано иное
+        cover_subtitle: Документация # второе название на титульном листе по дефолту, если в метаданных в md не указано иное
+        toc: true # добавляем оглавление
+        toc_level: 4 # глубина оглавления
+        toc_title: Оглавление # название оглавления
+        toc_numbering: false # автоматическая нумерация в оглавлении
+        cover_images: # картинка на титуле
+          default: TWD_logo.png # дефолт
+        #enabled_if_env: ENABLE_PDF_EXPORT # чтобы убрать кнопку выгрузки в пдф со страницы портала, указываем enabled_if_env: ENABLE_PDF_EXPORT. В этом случае при серве и билде не будут генериться пдфки. Чтобы включить обратно генерацию пдф, надо закомментить эту строку
+        #custom_template_path: TEMPLATES PATH  #если захотим использовать шаблон для титула, то тут пропишем относительный путь к шаблону. Шаблон должен быть написан на html или на jinja,  но это не точно. 
+ 

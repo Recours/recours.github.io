@@ -1,10 +1,18 @@
+---
+pdf:
+  build: true
+  filename: diy-docs-portal
+  title: Портал с документацией своими руками
+  subtitle: без devops'ов и разработчиков
+---
+
 # Как запустить свой первый портал
 
 <a id = "anchor-1"></a>
 
 ## Предварительная подготовка
 
-1. Регистрируемся в [GitHub](https://github.com/). 
+1. Регистрируемся на [GitHub](https://github.com/). 
 
 2. Создаем свой первый проект. Это можно сделать сразу после регистрации или создать позже.
 
@@ -96,81 +104,90 @@ site_name: My Docs
 
 1. Установим тему Material:
 
-  ```
-  pip install mkdocs-material
-  ```
+	```
+	pip install mkdocs-material
+	```
 
 2. Устанавливаем пакет расширений (понадобится нам в будущем):
 
-  ```
-  pip install pymdown-extensions
-  ```
+	```
+	pip install pymdown-extensions
+	```
 
-3. Откроем файл mkdocs.yml и подключим ее к нашему проекту:
+3. Откроем файл mkdocs.yml и подключим тему Material к нашему проекту:
 
-  ```
-  theme:
-  	name: material # https://squidfunk.github.io/mkdocs-material/
-  ```
+	```
+	theme:
+		name: material # https://squidfunk.github.io/mkdocs-material/
+	```
 
 4. Пересоберем портал:
 
-  ```
-  mkdocs serve
-  ```
+	```
+	mkdocs serve
+	```
 
 5. Нам нужно добавить новый документ на наш портал и при это указать его в навигационном меню. Для этого в файле mkdocs.yml нужно создать новую секцию:
 
-  ```
-  nav:
-  ```
+	```
+	nav:
+	```
 
 6. Теперь скачайте из Телеграмма файлик `my-first-docs-portal.md`. И перенесите его в папку **docs** в вашем проекте.
 
 7. Добавим инструкцию на портал:
 
-  ```
-  nav:
-  	- Как создать свой первый портал?: my-first-docs-portal.md
-  ```
+	```
+	nav:
+		- Как создать свой первый портал?: my-first-docs-portal.md
+	```
 
 8. Добавим группирующий раздел и перенесем навигационную панель наверх.
 
-  ```
-  nav:
-  	- HowTo:
-  		- Как создать свой первый портал?: my-first-docs-portal.md
-  theme:
-  	name: material # основная тема, которую используем, https://squidfunk.github.io/mkdocs-material/
-  	features:
-  		- navigation.tabs # перемещает навигационное меню наверх
-  ```
+	```
+	nav:
+		- HowTo:
+			- Как создать свой первый портал?: my-first-docs-portal.md
+	theme:
+		name: material # основная тема, которую используем, https://squidfunk.github.io/mkdocs-material/
+		features:
+			- navigation.tabs # перемещает навигационное меню наверх
+	```
 
 9. Заменим логотип на нашем портале:
 
-  ```
-  theme:
-  	name: material #  https://squidfunk.github.io/mkdocs-material/
-  	logo: VK_WorkSpace_logo.svg
-  ```
+	```
+	theme:
+		name: material #  https://squidfunk.github.io/mkdocs-material/
+		logo: VK_WorkSpace_logo.svg
+	```
 
 10. Поменяем цвета портала на корпоративные. Для этого нужно внутри папки docs нужно создать файл material-styles.css и указать путь до него в mkdocs.yml:
 
-  ```
-  extra_css:
-  	- material-styles.css
-  ```
+	```
+	extra_css:
+		- material-styles.css
+	```
 
-   А внутри файла material-styles.css укажем стили для шапки нашего портала:
+	А внутри файла material-styles.css укажем стили для шапки нашего портала:
 
-   ```
-   .md-header {
-   --md-primary-fg-color: #FFFFFF;
-   --md-primary-bg-color: #000000;
-   }
-   ```
+	 ```
+	 .md-header {
+	 --md-primary-fg-color: #FFFFFF;
+	 --md-primary-bg-color: #000000;
+	 }
+	 ```
 
+11. Добавим поисковую строку на порталЖ
 
+    ```
+    plugins:
+        - search:
+            lang:
+              - ru
+    ```
+
+    
 
 Итоговый `mkdocs.yml`:
 
@@ -194,7 +211,7 @@ extra_css:
 
 Рекомендуемые инструменты:
 
-1. Плагин для работы с видео на портал:
+1. Плагин для работы с видео на портале:
 
 	```
 	plugins:
@@ -217,7 +234,7 @@ extra_css:
 	```
 	
 	!!!warning "Внимание"
-		Вот например красивое внимание
+		Вот например красивое внимание :)
 
 3. Расширение, которое позволяет переиспользовать одинаковые части документации:
 
@@ -228,6 +245,17 @@ extra_css:
 	
 	!!!note "Примечание"
 		Нам в последнее время стало более актуально использовать шаблонизатор Jinja, который работает в рамках плагина [mkdocs-macros-plugin](https://mkdocs-macros-plugin.readthedocs.io/en/latest/).
+	
+3. Очень полезным может быть плагин делающий редиректы: [mkdocs-redirects](https://github.com/mkdocs/mkdocs-redirects).
+
+	```
+	plugins:
+	    - redirects:
+	        redirect_maps:
+	          'Support/new.md': 'LegalInformation/general_info.md'
+	```
+	
+	
 
 ## Начинаем работать с Git
 
@@ -287,12 +315,11 @@ extra_css:
 	```
 	
 
-Если вы как и я не фанаты работать с консолью, то рекоменду воспользоваться UI клиентами для работы с Git:
+Если вы как и я не фанаты работать с консолью, то рекомендую воспользоваться клиентами с полноценным UI для работы с Git:
 
 - [Sourcetree](https://www.sourcetreeapp.com/)
 - [Fork](https://git-fork.com/)
 - [GitHub Desktop](https://desktop.github.com/)
-	
 ## Публикуем контент в GitHub Pages
 
 Нам нужно назвать свой репозиторий в следующем виде: {GitHub-nickname}.github.io. Например: recours.github.io. Переименовать репозиторий можно в разделе Settings проекта. Это требование GitHub'а, иначе публикации не будет.
@@ -386,7 +413,7 @@ pages:
 
 
 ​	
-## Как подключить к репозиторию в GitLab локальный раннер
+## Как подключить локальный раннер к репозиторию в GitLab
 
 Раннер нужен для выполнения задач описанных в GitHub Actions и GitLab CI. В GitHub нет необходимости подключать свои раннеры, потому что все на себя берут публичные раннеры. 
 В GitLab время этих раннеров сильно ограничено, либо их может не быть совсем, если это GitLab в вашей инфраструктуре. При этом у вас нет публичных раннеров на компанию.
@@ -406,6 +433,7 @@ pages:
 	```
 	
 4. В репозитории проекта в **GitLab** перейдите в раздел **Settings** → **CI/CD** и разверните раздел **Runners**. Нам понадобится эта страница для настройки раннера:
+   ![screen_1](./screen_1.png) 
 
 5. Перейдите в Docker, в раздел Containers.
 
@@ -420,6 +448,7 @@ pages:
 8. Введите ваш GitLab instance, например: https://gitlab.com/
 
 9. Введите registration token из шага 3.
+   ![screen_2](./screen_2.png) 
 
 10. Опционально оставляем описание и теги. Можно просто прокликать Enter.
 
@@ -428,3 +457,4 @@ pages:
 12. Пропишите образ докера по умолчанию: `ruby 2.7`.
 
 13. Обновите страницу в GitLab'e и проверьте, что раннер появился:
+    ![screen_3](./screen_3.png) 
