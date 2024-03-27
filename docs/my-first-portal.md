@@ -51,7 +51,7 @@ pdf:
 
 2. Устанавливаем MkDocs локально:
 
-    ```
+	```
     pip install mkdocs
     ```
 
@@ -139,46 +139,55 @@ site_name: My Docs
 
 	```
 	nav:
-		- Как создать свой первый портал?: my-first-docs-portal.md
+		- Как запустить первый портал?: my-first-docs-portal.md
 	```
 
-8. Добавим группирующий раздел и перенесем навигационную панель наверх.
+8. Добавим расширение, которое сделает блоки кода более красивыми:
+
+	```
+	markdown_extensions:
+		- pymdownx.superfences # более гибкое оформление блоков https://facelessuser.github.io/pymdown-extensions/extensions/superfences/
+	```
+
+9. Добавим группирующий раздел и перенесем навигационную панель наверх.
 
 	```
 	nav:
-		- HowTo:
-			- Как создать свой первый портал?: my-first-docs-portal.md
+		- Как запустить первый портал?:
+			- Вот так: my-first-portal.md
+		- Дом: index.md
 	theme:
 		name: material # основная тема, которую используем, https://squidfunk.github.io/mkdocs-material/
-		features:
-			- navigation.tabs # перемещает навигационное меню наверх
+  	features:
+  		- navigation.tabs # перемещает навигационное меню наверх
 	```
 
-9. Заменим логотип на нашем портале:
+10. Заменим логотип и favicon на нашем портале:
 
 	```
 	theme:
 		name: material #  https://squidfunk.github.io/mkdocs-material/
-		logo: VK_WorkSpace_logo.svg
+		logo: TWD_logo.png
+		favicon: TWD_logo.png
 	```
 
-10. Поменяем цвета портала на корпоративные. Для этого нужно внутри папки docs нужно создать файл material-styles.css и указать путь до него в mkdocs.yml:
+11. Поменяем цвета портала на корпоративные. Для этого нужно внутри папки docs нужно создать файл material-styles.css и указать путь до него в mkdocs.yml:
 
 	```
-	extra_css:
-		- material-styles.css
-	```
+    extra_css:
+    	- material-styles.css
+    ```
 
-	А внутри файла material-styles.css укажем стили для шапки нашего портала:
+    А внутри файла material-styles.css укажем стили для шапки нашего портала:
 
-	 ```
-	 .md-header {
-	 --md-primary-fg-color: #FFFFFF;
-	 --md-primary-bg-color: #000000;
-	 }
-	 ```
+     ```
+     .md-header {
+     --md-primary-fg-color: #FFFFFF;
+     --md-primary-bg-color: #000000;
+     }
+     ```
 
-11. Добавим поисковую строку на порталЖ
+12. Добавим поисковую строку на портал:
 
     ```
     plugins:
@@ -187,24 +196,29 @@ site_name: My Docs
               - ru
     ```
 
-    
 
 Итоговый `mkdocs.yml`:
 
 ```
-site_name: My Docs
+site_name: Tech Writer Days
 nav:
-    - HowTo:
-        - Как создать свой первый портал?: index.md
-    - FAQ:
-        - Вопрос-ответ: my-first-docs-portal.md
+    - Как запустить первый портал?:
+        - Вот так: my-first-portal.md
+    - Дом: index.md
 theme:
-    name: material # основная тема, которую используем, https://squidfunk.github.io/mkdocs-material/
-    logo: VK_WorkSpace_logo.svg # относительный путь к лого, который отображается на портале и на титуле дока, в колонтитулах дока, обязательно svg
+    name: material
+    logo: TWD_logo.png
+    favicon: TWD_logo.png
     features:
         - navigation.tabs
 extra_css:
     - material-styles.css
+markdown_extensions:
+    - pymdownx.superfences
+plugins:
+    - search:
+        lang:
+          - ru
 ```
 
 
@@ -264,15 +278,15 @@ extra_css:
 1. Склонируем репозиторий в любое удобное место, но не в папку с нашим порталом. 
 
 	```
-	PS C:\Users\User\Desktop> git clone https://gitlab.com/nikitasgroup1/my-first-docs-portal
+	PS C:\Users\User\Desktop> git clone https://github.com/Recours/recours.github.io.git
 	```
 
-2. В моем случае, я клонировал на рабочий стол и у меня появилась папка с названием репозитория. Теперь нужно перенести все содержимое папки my-project внутрь новой папки.
+2. В моем случае, я клонировал на рабочий стол и у меня появилась папка с названием репозитория. Теперь нужно перенести все содержимое папки **my-project** внутрь новой папки.
 
 3. Перейдем внутрь папки репозитория.
 
 	```
-	cd my-first-docs-portal
+	cd recours.github.io
 	```
 	
 3. Собираем наш первый коммит:
@@ -282,7 +296,7 @@ extra_css:
 	git commit -m "Наш первый портал"
 	```
 	
-	Итог
+	Итог:
 	
 	```
 	[main 88fd875] Наш первый портал
@@ -299,6 +313,8 @@ extra_css:
 	```
 	git push -uf origin main
 	```
+	
+	где `main` это название ветки.
 	
 	Итог:
 	
