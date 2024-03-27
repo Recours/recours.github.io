@@ -1,0 +1,183 @@
+   .md-header {
+	 --md-primary-fg-color: #FFFFFF;
+	 --md-primary-bg-color: #000000;
+   }
+
+/*шрифты для отрисовки текста на сайте и в экспортируемом PDF*/
+:root {
+  --md-text-font: "VK Sans Display";
+  --md-code-font: "Roboto Mono";
+}
+
+/*вставка разрывов страниц в тексте экспортируеммого PDF. В md-исходник нужно добавлять 
+  <div class="pagebreak"></div> в том месте, перед которым хотим разрыв*/
+@media print {
+  .pagebreak { 
+     page-break-before: always; 
+  }
+
+ /* в верхний правый угол экспортируемого в PDF файла вставляем пустую строчку,
+ чтобы убрать logo, приезжающее из mkdocs.yml > theme: logo: logo.svg
+ + нумерация страниц на русском
+ + убираем нумерацию с титульника*/
+  @page {
+    @top-right {
+      content: "" !important;
+    }
+    @top-left {
+      content: "" !important;
+    }
+    @bottom-right {
+      content: "Страница " counter(page) " из " counter(pages) !important;
+    }
+    @bottom-center {
+      content: "" !important;
+        }
+    @bottom-left {
+      content: "" !important;
+    }
+  }
+  @page :first {
+    @bottom-right {
+      content: "" !important;
+    }
+  }
+}
+
+
+/* Выравнивание по левому краю значение в поле title из метаданных, при экспорте в pdf */
+#doc-cover .wrapper h1 {
+  text-align: left;
+}
+
+
+/* Выравнивание по левому краю значение в поле subtitle из метаданных, при экспорте в pdf */
+#doc-cover .wrapper h2 {
+  text-align: left;
+  /* Костыль для переноса слов в сайбтайтле
+   width: 70%;
+  line-height: 100px;*/
+}
+
+/*Лого VK WorkSpace в нормальном размере и в левом верхнем угла 
+на титульном листе экспортируемого PDF (плагин mkdocs-pdf-generate*/
+
+#doc-cover .logo{
+  position: absolute;
+  top: 0;
+  left: 0;
+  /*outline: 2px solid red;*/
+  /*background-size: 30% !important;*/
+  width: 8% !important;
+  /*height: 30% !important;*/
+  background-position: left top !important;
+}
+
+/*Убираем блок со свойствами (имя автора и картинка с url на сайт документации) из нижнего левого угла титульного листа*/
+#doc-cover .properties {
+  display: none !important;
+}
+/* отключаем нижний колонтитул */
+.md-footer-nav {
+  display: none;
+}
+
+
+.md-typeset h1 {
+  font-weight: 700;
+  color: #000000 !important;
+}
+
+/* заголовок полужирный и подчеркнутый */
+.md-typeset h2 {
+  font-size: 22pt !important;
+  font-weight: 700;
+  border-bottom: 1px solid #c6c6c6;
+}
+.md-typeset h3 {
+	font-size: 18pt !important;
+    font-weight: 700;
+  
+}
+.md-typeset h4 {
+  font-weight: 700;
+  font-size: 16pt !important;
+}
+.md-typeset h5 {
+  font-weight: 700;
+  font-size: 14pt !important;
+  text-transform: none !important;
+  color: #000000 !important;
+}
+
+/*шрифты*/
+
+@font-face {
+    font-family: VK Sans Display;
+    src: url(fonts/VK_Sans_Display_Bold.710bc371.woff2) format("woff2"),url(fonts/VK_Sans_Display_Bold.ff08dca7.woff) format("woff");
+    font-weight: 700;
+    font-display: fallback
+}
+
+@font-face {
+    font-family: VK Sans Display;
+    src: url(fonts/VK_Sans_Display_DemiBold.d124363b.woff2) format("woff2"),url(fonts/VK_Sans_Display_DemiBold.fc7db809.woff) format("woff");
+    font-weight: 600;
+    font-display: fallback
+}
+
+@font-face {
+    font-family: VK Sans Display;
+    src: url(fonts/VK_Sans_Display_Medium.2561a4da.woff2) format("woff2"),url(fonts/VK_Sans_Display_Medium.28e6b932.woff) format("woff");
+    font-weight: 500;
+    font-display: fallback
+}
+
+@font-face {
+    font-family: VK Sans Display;
+    src: url(fonts/VK_Sans_Display_Regular.be29baa2.woff2) format("woff2"),url(fonts/VK_Sans_Display_Regular.8c5c037e.woff) format("woff");
+    font-weight: 400;
+    font-display: fallback
+}
+
+@font-face {
+    font-family: VK Sans Display;
+    src: url(fonts/VK_Sans_Display_Light.51dd9008.woff2) format("woff2"),url(fonts/VK_Sans_Display_Light.c9cb729b.woff) format("woff");
+    font-weight: 300;
+    font-display: fallback
+}
+
+@font-face {
+    font-family: Roboto Mono;
+    src: url(fonts/RobotoMonoThin.a50e89d2.woff) format("woff");
+    font-weight: 100;
+    font-display: fallback
+}
+
+@font-face {
+    font-family: Roboto Mono;
+    src: url(fonts/RobotoMonoLight.939357ba.woff) format("woff");
+    font-weight: 300;
+    font-display: fallback
+}
+
+@font-face {
+    font-family: Roboto Mono;
+    src: url(fonts/RobotoMonoRegular.01f6eb6b.woff) format("woff");
+    font-weight: 400;
+    font-display: fallback
+}
+
+@font-face {
+    font-family: Roboto Mono;
+    src: url(fonts/RobotoMonoMedium.0d0476d2.woff) format("woff");
+    font-weight: 500;
+    font-display: fallback
+}
+
+@font-face {
+    font-family: Roboto Mono;
+    src: url(fonts/RobotoMonoBold.57c05b32.woff) format("woff");
+    font-weight: 700;
+    font-display: fallback
+}
