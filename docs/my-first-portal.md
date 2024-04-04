@@ -158,8 +158,8 @@ site_name: My Docs
 		- Дом: index.md
 	theme:
 		name: material # основная тема, которую используем, https://squidfunk.github.io/mkdocs-material/
-  	features:
-  		- navigation.tabs # перемещает навигационное меню наверх
+		features:
+			- navigation.tabs # перемещает навигационное меню наверх
 	```
 
 10. Заменим логотип и favicon на нашем портале:
@@ -168,7 +168,7 @@ site_name: My Docs
 	theme:
 		name: material #  https://squidfunk.github.io/mkdocs-material/
 		logo: TWD_logo.png
-		favicon: TWD_logo.png
+		favicon: TWD_favicon.png
 	```
 
 11. Поменяем цвета портала на корпоративные. Для этого нужно внутри папки docs нужно создать файл material-styles.css и указать путь до него в mkdocs.yml:
@@ -208,7 +208,7 @@ nav:
 theme:
     name: material
     logo: TWD_logo.png
-    favicon: TWD_logo.png
+    favicon: TWD_favicon.png
     features:
         - navigation.tabs
 extra_css:
