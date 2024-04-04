@@ -19,7 +19,7 @@ plugins:
     - search:
         lang:
           - ru
-    - pdf-generate: # плагин для выгрузки в PDF https://github.com/iSOLveIT/mkdocs-pdf-generate
+    #- pdf-generate: # плагин для выгрузки в PDF https://github.com/iSOLveIT/mkdocs-pdf-generate
         copyright: "© TechWriter Days, 2024 г. Все права защищены"
         cover: true
         cover_title: TWD # название на титульном листе по дефолту, если в метаданных в md не указано иное
