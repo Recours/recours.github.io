@@ -1,0 +1,105 @@
+# Этот скрипт выполняет синхронизацию файлов между репозиториями
+.default_script:
+  &default_script # Тут содержатся переменные для работы default_script
+  <<: *run_only_on_master
+  variables:
+    # Название репозиторя на гитлаб
+    TARGET: ""
+    # Содержимое каких папок нужно скопировать, через пробел
+    FOLDERS: ""
+    # Какие конкретно файлы нужно скопировать, через пробел (при необходимости)
+    FILES: ""
+    # Оставить это поле пустым, чтобы копирование происходило в саму директорию, а не в конкретную папку
+    # Если нужно добавить файлы в конкретную папку, то добавить слэш перед названием папки, например /dest
+    DEST: ""
+    # Эта переменная определяет будут ли скопированы папки полностью или только файлы внутри папок в DEST
+    # Можно указать "no", тогда копирует только файлы из папки, не копируя саму папку. т.е. все файлы из FOLDER_NAME будут лежать в DEST/
+    # По умолчанию используем режим, который копирует саму папку. То есть все файлы из FOLDER_NAME будут лежать в DEST/FOLDER_NAME
+    INCLUDE_FOLDER_NAMES: ""
+  script:
+
+      # Качаем гит (если его нет в образе)
+    
+    - apk add git
+
+      # Клонируем репозиторий, из которого нужно скопировать файлы и папки
+    
+    - gl_token=${GITLAB_TOKEN}
+    - target_branch="master"
+    - git clone -b ${target_branch} https://oauth2:$gl_token@${GITLAB}/${TARGET} tmp;
+    - folder_postfix=""
+      
+      # Добавляем путь, который описывает все файлы в папке, если указан режим который не допускает копирование самих папок
+
+    - if [ ${INCLUDE_FOLDER_NAMES} == "no" ]; then
+        folder_postfix="/*";
+      fi
+
+      # Копируем папки
+
+    - for folder in $FOLDERS; do mkdir -p tmp${DEST} && cp -rf $folder$folder_postfix tmp${DEST}; done;
+      
+      # Копируем файлы
+
+    - for file in $FILES; do cp -rf $file ./tmp${DEST}; done
+      
+      # Переходим в скачаный репозиторий
+
+    - cd ./tmp
+
+    # Собираем все файлы, которые есть в /tmp/DEST
+    # Если DEST корень то мы возьмем все файлы из корня, если нет то все файлы из DEST
+
+    - fol="*"
+    - if [ ${DEST} != "" ]; then
+        fol=".${DEST}";
+      fi
+    - GIT_FILES=$(find "$fol" -type f -print0 | xargs -0)
+
+      # Добавляем локального пользователя гит, с именем и имейлом указаном в переменных
+
+    - git config user.name "${CI_GIT_NAME}"
+    - git config user.email "${CI_GIT_EMAIL}"
+      # Коммит всех файлов, которые проходят фильтр
+    - check=""
+    - for file in $GIT_FILES; do
+        check="";
+        for exluded_file in ${EXCLUDE}; do
+          if [ "$(basename "$file")" == "$exluded_file" ];then
+            check="yes";
+          fi
+        done;
+        if [ "$check" != "yes" ]; then 
+          echo "$file";
+          git add "$file";
+        fi;
+      done
+    - git commit --quiet --allow-empty -m "${CI_GIT_COMMIT_MESSAGE1}"
+      # Пуш
+    - git push --quiet
+      # Переход обратно из скачанного репозитория
+    - cd ..
+      #Удаляем папки со скачанным репозиторием
+    - rm -r ./tmp
+
+# Ниже определяются джобы для разных репозиториев.
+
+user-guide-templates:
+  <<: *default_script
+  stage: .pre
+  variables:
+    TARGET: ${JINJA_TARGET}
+    FOLDERS: docs/jinja-templates
+    FILES:
+    INCLUDE_FOLDER_NAMES: "no"
+    DEST: "/docs/jinja-templates"
+
+admin-guide-templates:
+  <<: *default_script
+  stage: .pre
+  variables:
+    TARGET: ${JINJA_TARGET}
+    FOLDERS: docs/admin-panel/jinja-templates
+    FILES:
+    INCLUDE_FOLDER_NAMES: "no"
+    DEST: "/docs/admin-panel/jinja-templates"

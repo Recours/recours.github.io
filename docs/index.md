@@ -1,23 +1,9 @@
----
-pdf:
-  build: false
----
+# Есть только путь до Single Source
 
+Этот портал я собрал к своему докладу про Single Source для MkDocs. 
 
-# Welcome to MkDocs
+Я воспроизвел все слайды с примерами на этом портале. Вы можете посмотреть как выглядит работа с jinja-шаблонами и посмотреть исходный код всех страниц. К репозиторию можно перейти если кликнуть в правом верхнем углу сюда:
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+![1](./images/1.png)
 
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+Там же в репозитории находится **.gitlab-ci.yml**, который можно использовать для передачи jinja-шаблонов между репозиториями.

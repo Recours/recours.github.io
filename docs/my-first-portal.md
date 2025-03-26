@@ -133,13 +133,13 @@ site_name: My Docs
 	nav:
 	```
 
-6. Теперь скачайте из Телеграмма файлик `my-first-docs-portal.md`. И перенесите его в папку **docs** в вашем проекте.
+6. Теперь скачайте файлик `my-first-docs-portal.md`. И перенесите его в папку **docs** в вашем проекте.
 
 7. Добавим инструкцию на портал:
 
 	```
 	nav:
-		- Как запустить первый портал?: my-first-docs-portal.md
+		- Как запустить первый портал?: my-first-portal.md
 	```
 
 8. Добавим расширение, которое сделает блоки кода более красивыми:
@@ -167,8 +167,8 @@ site_name: My Docs
 	```
 	theme:
 		name: material #  https://squidfunk.github.io/mkdocs-material/
-		logo: TWD_logo.png
-		favicon: TWD_favicon.png
+		logo: VK_WorkSpace.svg
+    	favicon: VK_WorkSpace_logo.svg
 	```
 
 11. Поменяем цвета портала на корпоративные. Для этого нужно внутри папки docs нужно создать файл material-styles.css и указать путь до него в mkdocs.yml:
@@ -200,15 +200,15 @@ site_name: My Docs
 Итоговый `mkdocs.yml`:
 
 ```
-site_name: Tech Writer Days
+site_name: VK MkDocs Demo
 nav:
     - Как запустить первый портал?:
         - Вот так: my-first-portal.md
     - Дом: index.md
 theme:
     name: material
-    logo: TWD_logo.png
-    favicon: TWD_favicon.png
+    logo: VK_WorkSpace.svg
+    favicon: VK_WorkSpace_logo.svg
     features:
         - navigation.tabs
 extra_css:
@@ -273,17 +273,46 @@ plugins:
 
 ## Начинаем работать с Git
 
-Чтобы сохранять, версионировать и запускать портал нам понадобится GitLab/GitHub. Сначала нам нужно склонировать репозиторий, который мы создавали на шаге [Предварительная подготовка](#anchor-1).
+Чтобы сохранять, версионировать и запускать портал нам понадобится GitLab/GitHub. Самый эффективный и простой способ склонировать репозиторий без ограничений на push, это создать Personal Access Token и использовать его при клонировании репозитория:
+
+1. В правом верхнем углу кликаем на аватар своего профиля.
+
+2. В открывшемся меню выбираем раздел **Settings**.
+
+3. В самом низу левого меню ищем раздел **Developer Settings** и кликаем на него.
+
+4. Переходим в **Personal Access Tokens** → **Tokens (classic)**.
+
+5. Кликаем на выпадающее меню **Generate new token** и выбираем **Generate new token (classic)**.
+
+6. Задаем краткое описание токену и проставляем все галочки снизу.
+
+7. В самом низу кликаем кнопку **Generate Token**.
+
+
+Теперь наконец склонируем репозиторий, который мы создавали на шаге [Предварительная подготовка](#anchor-1).
 
 1. Склонируем репозиторий в любое удобное место, но не в папку с нашим порталом. 
 
 	```
 	PS C:\Users\User\Desktop> git clone https://github.com/Recours/recours.github.io.git
 	```
+	
+	или через Personal Access Token:
+
+	```
+	git clone https://oauth2:{сгенерированный токен}@{ссылка до репозитория без https://}
+	```
+
+	Например:
+
+	```
+	git clone https://oauth2:{сгенерированный токен}@github.com/diy-portal/one-more-test
+	```
 
 2. В моем случае, я клонировал на рабочий стол и у меня появилась папка с названием репозитория. Теперь нужно перенести все содержимое папки **my-project** внутрь новой папки.
 
-3. Перейдем внутрь папки репозитория.
+3. Перейдем внутрь папки с названием репозитория.
 
 	```
 	cd recours.github.io
@@ -329,16 +358,24 @@ plugins:
 	   e7a1c28..c9db308  main -> main
 	branch 'main' set up to track 'origin/main'.
 	```
-	
 
 Если вы как и я не фанаты работать с консолью, то рекомендую воспользоваться клиентами с полноценным UI для работы с Git:
 
 - [Sourcetree](https://www.sourcetreeapp.com/)
 - [Fork](https://git-fork.com/)
 - [GitHub Desktop](https://desktop.github.com/)
+
 ## Публикуем контент в GitHub Pages
 
-Нам нужно назвать свой репозиторий в следующем виде: {GitHub-nickname}.github.io. Например: recours.github.io. Переименовать репозиторий можно в разделе Settings проекта. Это требование GitHub'а, иначе публикации не будет.
+Чтобы опубликовать контент в GitHub Pages, нам нужно сделать следующие действия:
+
+1. Переименовать репозиторий в виде: {GitHub-nickname}.github.io. Например: [recours.github.io](https://recours.github.io). Переименовать репозиторий можно в разделе Settings проекта. Это требование GitHub'а, иначе публикации не будет.
+
+2. В том же разделе Settings, в левой боковой панели нам нужно перейти в раздел **Actions** → **General**.
+
+3. Пролистать до подраздела **Workflow permissions** и выбрать радио-баттон с опцией «Read and write permissions».
+
+Затем добавляем скрипт автоматизирующий выкладку контента на наш веб-портал:
 
 1. В корневой папке нашего проекта создайте папку **.github**.
 
@@ -363,7 +400,7 @@ plugins:
 			with:
 			  python-version: 3.x
 		  - run: pip install mkdocs-material
-		  - run: mkdocs gh-deploy --force-
+		  - run: mkdocs gh-deploy --force
 	```
 
 	Что есть в этом скрипте:
@@ -380,6 +417,16 @@ plugins:
 	git commit -m "Автоматическая публикация контента"
 	git push -uf origin main
 	```
+После того, как все job'ы выполнятся нам нужно переключить ветку, с которой будет происходить публикация контента. Сейчас на {GitHub-nickname}.github.io скорее всего весит 404 ошибка. Поэтому мы:
+
+1. Переходим в **Settings** репозитория.
+
+2. В левой боковой панели выбираем раздел **Pages**.
+
+3. В подразделе **Build and deployment** в дропдауне опции **Branch** выбираем ветку `gh-pages`.
+
+4. Ждем чуть меньше минуты и снова заходим на портал.
+
 
 ### Публикуем контент в GitLab Pages
 
@@ -427,8 +474,6 @@ pages:
       - public
 ```
 
-
-​	
 ## Как подключить локальный раннер к репозиторию в GitLab
 
 Раннер нужен для выполнения задач описанных в GitHub Actions и GitLab CI. В GitHub нет необходимости подключать свои раннеры, потому что все на себя берут публичные раннеры. 
