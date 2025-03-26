@@ -3,8 +3,8 @@ repo_url: https://github.com/Recours/recours.github.io
 repo_name: way-to-single-source
 theme:
     name: material
-    logo: TWD_favicon.png
-    favicon: TWD_logo.png
+    logo: TWD_logo.png
+    favicon: TWD_favicon.png
     features:
         - navigation.tabs
     font: false # отключает скачивание шрифтов для отрисовки темы материал из Гугла
